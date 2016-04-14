@@ -1,10 +1,10 @@
 import {Router} from 'express';
 import usersData from './app_modules/users';
 
-const users = Router();
+const usersRoute = Router();
 
 /* GET users listing. */
-users.get('/getuser/:uid', function(req, res, next) {
+usersRoute.get('/getuser/:uid', function(req, res, next) {
   var usersData = new usersData();
   usersData.getUser(req.params.uid)
   .then(function(result){
@@ -12,4 +12,4 @@ users.get('/getuser/:uid', function(req, res, next) {
   })
 });
 
-export default users;
+export default usersRoute;

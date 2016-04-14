@@ -3,7 +3,9 @@ var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var path_1 = require('path');
-var users_1 = require('./routes/users');
+var index_1 = require('./routes/index');
+var usersRoute_1 = require('./routes/usersRoute');
+var uploadtest_1 = require('./routes/uploadtest');
 var cookieParser = require('cookie-parser'); // this module doesn't use the ES6 default export yet
 var app = express();
 // view engine setup
@@ -16,7 +18,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path_1.join(__dirname, 'public')));
-app.use('/users', users_1.default);
+app.use('/js', express.static(__dirname + '/public/scripts')); // redirect bootstrap JS
+app.use('/css', express.static(__dirname + '/public/stylesheets'));
+app.use('/fonts', express.static(__dirname + '/public/fonts'));
+app.use('/', index_1.default);
+app.use('/users', usersRoute_1.default);
+app.use('/upload', uploadtest_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');

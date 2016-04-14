@@ -1,8 +1,8 @@
 "use strict";
 var express_1 = require('express');
-var users = express_1.Router();
+var usersRoute = express_1.Router();
 /* GET users listing. */
-users.get('/getuser/:uid', function (req, res, next) {
+usersRoute.get('/getuser/:uid', function (req, res, next) {
     var usersData = new usersData();
     usersData.getUser(req.params.uid)
         .then(function (result) {
@@ -10,5 +10,5 @@ users.get('/getuser/:uid', function (req, res, next) {
     });
 });
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = users;
-//# sourceMappingURL=users.js.map
+exports.default = usersRoute;
+//# sourceMappingURL=usersRoute.js.map

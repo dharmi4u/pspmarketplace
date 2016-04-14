@@ -1,10 +1,10 @@
 "use strict";
 var config = (function () {
     function config() {
-        this.host = process.env.HOST || "https://executivedashboardapp.documents.azure.com:443/";
-        this.authKey = process.env.AUTH_KEY || "qEW8qReetvNmsLPRtw8DF84qG9lJw2/2maCAQm7Di77m7w8DkHF9QFeeFNE7WKQ+ajPtR990GGCkd2gVvL7sWw==";
-        this.databaseId = "ExecutiveDashboard";
-        this.collectionId = "DashDetails";
+        this.host = process.env.HOST || "https://pspmarketplace.documents.azure.com:443/";
+        this.authKey = process.env.AUTH_KEY || "Cs2Ni969kg9H7S7SP9QjFbYt1IVrEVyRIYUWPxhLkFo8VVcJujjEmz1mF7nTwbQQVuSB4PHpOACvh4ODzaneew==";
+        this.databaseId = "psp";
+        this.collectionId = "Upload";
     }
     return config;
 }());

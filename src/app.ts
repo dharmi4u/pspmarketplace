@@ -2,7 +2,9 @@ import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import {join} from 'path';
-import users from './routes/users';
+import index from './routes/index';
+import usersRoute from './routes/usersRoute';
+import upload from './routes/uploadtest';
 import cookieParser = require('cookie-parser'); // this module doesn't use the ES6 default export yet
 
 const app: express.Express = express();
@@ -18,8 +20,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
+app.use('/js', express.static(__dirname + '/public/scripts')); // redirect bootstrap JS
+app.use('/css', express.static(__dirname + '/public/stylesheets'));
+app.use('/fonts', express.static(__dirname + '/public/fonts'));
 
-app.use('/users', users);
+app.use('/', index);
+app.use('/users', usersRoute);
+app.use('/upload', upload);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -53,6 +60,8 @@ app.use((error: any, req, res, next) => {
   });
   return null;
 });
+
+
 
 
 export default app;

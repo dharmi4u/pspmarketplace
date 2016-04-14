@@ -19,7 +19,7 @@ class users {
         this.dbHelperQueryObj = new dbHelperQuery(this.docDbClient, this.configObj.databaseId, this.configObj.collectionId);
     }
     
-    getUser(uid:string){
+    /*getUser(uid:string){
         var self = this;
         return new Promise(function(resolve, reject){
             self.dbHelperQueryObj.executeQuery((err, items) => {
@@ -49,5 +49,31 @@ class users {
             });
         });
     }
+    
+    insertDocument(){
+        var self = this;
+        return new Promise(function(resolve, reject){
+            self.dbHelperQueryObj.executeQuery((err, items) => {
+                if (err) {
+                    reject(err);
+                }
+                else {                    
+                    self.dbHelperQueryObj.addItem({ "status" : "true" , "id" : 1 }, (items) => {
+                        if (err) {
+                            reject(err);
+                        }
+                        else{
+                            resolve(items);
+                        }
+                    });
+                }
+            }); 
+        });
+    }*/
+    test(){
+        return {"company" : "wipro"}
+    }
 
 }
+
+export default users;
