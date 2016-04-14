@@ -19,7 +19,7 @@ class uploadModule {
         this.dbHelperQueryObj = new dbHelperQuery(this.docDbClient, this.configObj.databaseId, this.configObj.collectionId);
     }
             
-     insertDocument(){
+     insertDocument(docObject){
         var self = this;
         return new Promise(function(resolve, reject){
             self.dbHelperQueryObj.executeQuery((err, items) => {
@@ -27,7 +27,7 @@ class uploadModule {
                     reject(err);
                 }
                 else {                    
-                    self.dbHelperQueryObj.addItem({ "status" : "dharmi" , "no" : 1 }, (items) => {                      
+                    self.dbHelperQueryObj.addItem(docObject, (items) => {                      
                          resolve(items);                       
                     });
                 }

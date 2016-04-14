@@ -11,7 +11,7 @@ var uploadModule = (function () {
         });
         this.dbHelperQueryObj = new dbHelperQuery_1.default(this.docDbClient, this.configObj.databaseId, this.configObj.collectionId);
     }
-    uploadModule.prototype.insertDocument = function () {
+    uploadModule.prototype.insertDocument = function (docObject) {
         var self = this;
         return new es6_promise_1.Promise(function (resolve, reject) {
             self.dbHelperQueryObj.executeQuery(function (err, items) {
@@ -19,7 +19,7 @@ var uploadModule = (function () {
                     reject(err);
                 }
                 else {
-                    self.dbHelperQueryObj.addItem({ "status": "dharmi", "no": 1 }, function (items) {
+                    self.dbHelperQueryObj.addItem(docObject, function (items) {
                         resolve(items);
                     });
                 }
