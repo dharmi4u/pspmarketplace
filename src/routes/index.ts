@@ -2,7 +2,7 @@ import {Router} from 'express';
 import * as fs from 'fs';
 import * as frd from 'formidable';
 import * as filestore from 'fs-extra';
-import uploadModule from './app_modules/users';
+import uploadModule from '../app_modules/uploadModule';
 
 const index = Router();
 
@@ -12,7 +12,7 @@ index.get('/', function(req, res, next) {
 });
 
 
-index.post('/uploading', function(req, res, next) {
+index.post('/', function(req, res, next) {
  if (req.method.toLowerCase() == 'post') {       
         var fmr = new frd.IncomingForm();
         fmr.parse(req, function (err, fields, files) {
@@ -23,19 +23,19 @@ index.post('/uploading', function(req, res, next) {
         fmr.on('end', function (fields, files) {
             
             var tempPath = this.openedFiles[0].path;
- 
-            
+             
             var fileName = this.openedFiles[0].name;
- 
-                   
+                    
             var newFileName = "//D-113077851/GopikrishnaShare/PSPMarketPlace/"+ fileName;
              
             filestore.copy(tempPath, newFileName, function (err) {
                 if (err) {
                     console.error(err);
-                } else {     
+                } else {                         
                     var obj = new uploadModule();
-                    res.send(obj.test());                                                                                                          
+                    obj.insertDocument(function(result){
+                        res.end(JSON.stringify(result));
+                    });                                                                                                          
                 }
             });
         });

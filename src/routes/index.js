@@ -2,13 +2,13 @@
 var express_1 = require('express');
 var frd = require('formidable');
 var filestore = require('fs-extra');
-var users_1 = require('./app_modules/users');
+var uploadModule_1 = require('../app_modules/uploadModule');
 var index = express_1.Router();
 /* GET users listing. */
 index.get('/', function (req, res, next) {
     res.render("index");
 });
-index.post('/uploading', function (req, res, next) {
+index.post('/', function (req, res, next) {
     if (req.method.toLowerCase() == 'post') {
         var fmr = new frd.IncomingForm();
         fmr.parse(req, function (err, fields, files) {
@@ -23,8 +23,10 @@ index.post('/uploading', function (req, res, next) {
                     console.error(err);
                 }
                 else {
-                    var obj = new users_1.default();
-                    res.send(obj.test());
+                    var obj = new uploadModule_1.default();
+                    obj.insertDocument(function (result) {
+                        res.end(JSON.stringify(result));
+                    });
                 }
             });
         });

@@ -18,10 +18,22 @@ class uploadModule {
         });
         this.dbHelperQueryObj = new dbHelperQuery(this.docDbClient, this.configObj.databaseId, this.configObj.collectionId);
     }
-    
-    
-    
-    
+            
+     insertDocument(){
+        var self = this;
+        return new Promise(function(resolve, reject){
+            self.dbHelperQueryObj.executeQuery((err, items) => {
+                if (err) {
+                    reject(err);
+                }
+                else {                    
+                    self.dbHelperQueryObj.addItem({ "status" : "dharmi" , "no" : 1 }, (items) => {                      
+                         resolve(items);                       
+                    });
+                }
+            }); 
+        });
+    }
     /*uploadData(req, resp){
         if (req.method.toLowerCase() == 'post') {
  
